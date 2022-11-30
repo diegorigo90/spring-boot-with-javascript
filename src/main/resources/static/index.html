@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+<header>
+    <h1>Demo Spring with Javascript</h1>
+    <input id="value" type="number" title="Select value" onchange="getUser()"/>
+    <ul id="info" hidden="true">
+        <li>Nome: <span id="name"></span></li>
+        <li>Email: <span id="mail"></span></li>
+    </ul>
+</header>
+</body>
+</html>
+
+<script>
+function getUser(){
+    var id = document.getElementById("value").value;
+    console.log(id);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           obj = JSON.parse(xhttp.responseText);
+           document.getElementById("info").hidden = false;
+           document.getElementById("name").innerHTML = obj.name;
+           document.getElementById("mail").innerHTML = obj.email;
+        } else {
+           document.getElementById("info").hidden = true;
+        }
+    };
+    xhttp.open("GET", "/user/" + id, true);
+    xhttp.send();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
